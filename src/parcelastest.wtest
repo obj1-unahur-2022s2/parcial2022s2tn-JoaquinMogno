@@ -1,13 +1,19 @@
 import parcelas.*
+import plantas.*
+describe "test de parcelas e inta"{
+	const parcelaEcol = new ParcelaEcologica(ancho=15, largo=7, horasDeSol=11)
+	const parcelaEcolII = new ParcelaEcologica(ancho=7, largo=8, horasDeSol=15)
+	const chinoSoja1 = new Soja(altura= 2, anioObtencionSemilla=2001)
+	const chinoSoja2 = new Soja(altura= 3, anioObtencionSemilla=2002)
 
-describe "test de parcelas"{
-	const parcelaEcologica1 = new ParcelaEcologica(ancho=20, largo=1, horasDeSol=8)
 
-
-test "Una parcela de 20 mts. de ancho por 1 mt. de largo que recibe 8 horas de sol por día, 
-			tiene una superficie de 20 m2 y la cantidad máxima de plantas que tolera es de " {		
-				
-				assert.equals(4, parcelaEcologica1.cantidadMaximaDePlantas())
-			}
-			
+test "inta, planto 2 plantas en la parcela 1 y 2 y las agrego a la parcela. Debe dar 2" {
+		parcelaEcol.plantar(chinoSoja1)
+		parcelaEcol.plantar(chinoSoja2)
+		inta.agregarParcela(parcelaEcol)
+		inta.agregarParcela(parcelaEcolII)
+		
+		assert.equals(2, inta.sumaDePlantasPorParcela())
+	}													
 }
+

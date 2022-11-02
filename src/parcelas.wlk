@@ -1,9 +1,9 @@
 import plantas.*
 
 class Parcela{
-	var ancho
-	var largo
-	var horasDeSol
+	var property ancho
+	var property largo
+	var property horasDeSol
 	const property plantas = []
 	
 	method superficie() = ancho * largo
@@ -42,8 +42,12 @@ object inta{
 	method promedioDePlantasPorParcela(){}
 	
 	method promedioDePlantasPorParela() = self.sumaDePlantasPorParcela() / parcelas.size()
-	method sumaDePlantasPorParcela() = parcelas.sum({p=>p.plantas().size()}) 
 	
 	method parcelasConMasdeXPlantas(cantPlantas)= parcelas.filter({p => p.plantas().size() > cantPlantas})
 	method parcelaMasAutosustentable() = self.parcelasConMasdeXPlantas(4).max({p=>p.cantidadDePlantasBienAsociadas()})
+	
+	//method para test
+	method agregarParcela(unaParcela)= parcelas.add(unaParcela)
+	method sumaDePlantasPorParcela() = parcelas.sum({p=>p.plantas().size()}) 
+	
 }
