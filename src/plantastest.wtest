@@ -1,18 +1,59 @@
 import plantas.*
-describe "Test de Plantas"  {
-	
-	const menta1 = new Menta()
-	
-	method initialize() {
-		menta1.valor(3)
-	}
-	
-	test "Menta - test de ejemplo" {
-		assert.equals(3, menta1.valor())
+import parcelas.*
+// una menta de 1 metro, debería dar semillas y ocupar un espacio de 3 metros cuadrados.
+// una menta de solo 0.3 metros, no debería dar semillas y ocuparía 0.9 m2 de espacio.
 
+describe "test de plantas"{
+	const mentaGrande = new Menta(altura = 1, anioObtencionSemilla = 2016)
+	const mentaChica = new Menta(altura = 0.3, anioObtencionSemilla = 2014)
+	const sojaMediana = new Soja(altura = 0.6, anioObtencionSemilla = 2009)
+	const quinoaJoven = new Quinoa(altura = 0.5, anioObtencionSemilla = 2010, horasDeSolToleradas = 12 )
+	const quinoaAdulta = new Quinoa(altura = 0.5, anioObtencionSemilla = 2001, horasDeSolToleradas = 9 )
+	const chinoSojaTransgenica = new SojaTrangenica(altura = 0.5, anioObtencionSemilla=2002)
+	const hierbaMalaNuncaMuere = new Hierbabuena(altura=2, anioObtencionSemilla=1994 )
+	
+	
+	test "MentaGrande debería dar semillas ya que mide 1 metro" {
+	assert.that(mentaGrande.daNuevasSemillas())
 	}
+	test "mentaGrande debe ocupar un espacio de 3 metros cuadrados al medir un metro"{
+		assert.equals(3, mentaGrande.espacioOcupado())
+	}
+	
+	test "MentaChica no debería dar semillas ya que mide 0.4 metros" {
+	assert.notThat(mentaChica.daNuevasSemillas())
+	}
+	test "MentaChica debe ocupar un espacio de 0.9 metros cuadrados al medir 0.4 metros"{
+		assert.equals(0.9, mentaChica.espacioOcupado())
+	}
+	
+	test "la sojaMediana tiene una tolerancia al sol de 7 horas ya que su altura esta entre 0.5 y 1M "{
+		  	assert.equals(7,sojaMediana.horasDeSolToleradas())
+		  }
+	test "la sojaMediana no daria semillas ya que si bien su anioObtencionSemilla es posterior a 2009, su altura no es mayor a 1M"{
+		assert.notThat(sojaMediana.daNuevasSemillas())
+	}
+	test "la sojaMediana ocupa 0.3m2"{
+		assert.equals(0.3, sojaMediana.espacioOcupado())
+	}
+	
+	test "quinoaJoven es una planta que da semillas, ya que si bien, su anioObtencionSemillas 
+		  posterior a 2005(2010), es una planta fuerte porque tolera mas de 10 horas de sol(12)"{
+		assert.that(quinoaJoven.daNuevasSemillas())
+	}
+	test "quinoaAdulta es una planta que da semillas ya que su anioObtencionSemillas es anterior a 2005(2001)"{
+		assert.that(quinoaAdulta.daNuevasSemillas())
+	}
+	
+	test "chinoSojaTransgenica nunca da semillas porque esta esterilizada"{
+		assert.notThat(chinoSojaTransgenica.daNuevasSemillas())
+	}
+	test "hierbaMalaNuncaMuere ocupa el doble de espacio que una planta de menta de las 
+		  mismas caracteristicas(si mide 2m, la altura seria 6, y como hierbaBuena es el doble, 
+		  el resultado seria 12"{
+		assert.equals(12, hierbaMalaNuncaMuere.espacioOcupado())
+	}
+	
+	
 	
 }
-
-
-

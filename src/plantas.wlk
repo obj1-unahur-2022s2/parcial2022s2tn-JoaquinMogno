@@ -1,3 +1,64 @@
-class Menta {
-	var property valor=0
+import parcelas.*
+
+class Planta {
+	
+	// En número.
+	method horasDeSolToleradas()
+	// True or false
+	method esFuerte() = self.horasDeSolToleradas() > 10
+	// True or false
+	method daNuevasSemillas() = self.esFuerte()
+	// En metros
+	method espacioOcupado()
+	
+	method lePareceIdeal(unaParcela) 
+	
 }
+
+class Menta inherits Planta {
+	var anioObtencionSemilla
+	var altura
+	override method horasDeSolToleradas() = 6
+	override method daNuevasSemillas() = super() || altura > 0.4
+	override method espacioOcupado() = altura * 3
+	override method lePareceIdeal(unaParcela) = unaParcela.any({p => p.superficie() > 6})
+}
+
+class Hierbabuena inherits Menta {
+	override method espacioOcupado() = super() * 2
+}
+
+class Soja inherits Planta {
+	var anioObtencionSemilla
+	var altura
+	
+	override method horasDeSolToleradas(){return
+		if(altura<0.5){
+			6
+		}
+		else if(altura.between(0.5, 1)){
+			7
+		}
+		else 9
+	}	
+	override method daNuevasSemillas() = super() || anioObtencionSemilla > 2007 && altura > 1
+	override method espacioOcupado() = altura / 2
+	override method lePareceIdeal(unaParcela) = unaParcela.horasDeSol() == self.horasDeSolToleradas()
+}
+
+class SojaTrangenica inherits Soja {
+	override method daNuevasSemillas() = false
+	override method lePareceIdeal(unaParcela) = unaParcela.capacidadMaxDePlantas() == 1
+}
+
+class Quinoa inherits Planta {
+	var anioObtencionSemilla
+	var altura
+	var property horasDeSolToleradas
+	
+	override method horasDeSolToleradas() = horasDeSolToleradas
+	override method daNuevasSemillas() = super() ||anioObtencionSemilla < 2005
+	override method espacioOcupado() = 0.5
+	override method lePareceIdeal(unaParcela) = unaParcela.noHayPlantasGrandes()	
+}
+
