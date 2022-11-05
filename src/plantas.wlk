@@ -1,3 +1,6 @@
+/*
+ * OK
+ */
 import parcelas.*
 
 class Planta {

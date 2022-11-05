@@ -1,3 +1,7 @@
+/*
+ * En ``` plantar(unaPlanta) ``` el add de la planta debería ocurrir si todo va bien. En tu caso debería ir al final 
+ * Recordando que lanzar una excepción aborta la ejecucion del código. De acuerdo a como ajusté el método si ahora se lanza la execpcion nunca se ejecutaria el add
+ */
 import plantas.*
 
 class Parcela{
@@ -14,10 +18,10 @@ class Parcela{
 	method tieneComplicaciones() = plantas.any({p => p.horasDeSolToleradas() < horasDeSol})
 	
 	method plantar(unaPlanta){
-		plantas.add(unaPlanta)
 		if(self.capacidadMaxDePlantas() < plantas.size() || horasDeSol + 2 < unaPlanta.horasDeSolToleradas()){
 			self.error("no se puede plantar una planta")
 		}
+		plantas.add(unaPlanta)
 	}
 	
 	
